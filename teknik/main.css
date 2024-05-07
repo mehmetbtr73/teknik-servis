@@ -81,20 +81,7 @@
     border: none;
     color: white;
 }
-.tittle{
-    margin-top: 15px;
-    margin-left: 15px;
-    font-family: "Roboto Slab", serif;
-    font-style: normal;
-    color: rgb(72, 164, 240);
-    font-size: 18px;
-}
-.doubleinput{
-    width: 100%;
-    border:1px solid red;
-    display: flex;
-    justify-content: space-between;
-}
+
 .alt_menu{
     border:1px solid gray;
     border-radius: 8px;
