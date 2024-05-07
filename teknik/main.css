@@ -28,11 +28,9 @@
 .addcurrentbox{
     position: absolute;
     width: 700px;
-    height: 500px;
     border:1px solid gray;
     z-index: 5;
     border-radius:5px;
-    top:120px;
     left:calc(50% - 350px);
     right:calc(50% - 350px);
     background-color: rgb(253,253,253)
@@ -53,7 +51,6 @@
     align-items: center;
     padding-right: 25px;
     border-radius: 5px;
-    top: 450px;
 }
 #log{
     background-color: cadetblue;
