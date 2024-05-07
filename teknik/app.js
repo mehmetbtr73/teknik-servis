@@ -1,0 +1,11 @@
+$(function(){
+    $(".newcurrent").click(function(){
+        $(".addcurrentcontainer").css({display:'block'});
+    });
+    $("#currentboxexit").click(function(){
+        $(".addcurrentcontainer").css({display:'none'});
+    });
+    $("#cancel").click(function(){
+        $(".addcurrentcontainer").css({display:'none'});
+    });
+});
