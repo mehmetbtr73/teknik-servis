@@ -10,14 +10,7 @@
     width: 85vw;
     height: 100vh;
 }
-.description{
-   border:1px solid gray;
-   border-radius:5px;
-   width: 100%;
-   position: relative;
-   top: 7px; 
-   height: calc(100vh - 65px);
-}
+
 .addcurrentcontainer{
     position: absolute;
     z-index: 5;
@@ -33,7 +26,7 @@
     border-radius:5px;
     left:calc(50% - 350px);
     right:calc(50% - 350px);
-    background-color: rgb(253,253,253)
+    background-color: rgb(253,253,253);
 }
 #currentboxexit{
     position: absolute;
@@ -56,6 +49,7 @@
     background-color: cadetblue;
     margin-right: 15px;
     cursor: pointer;
+   
 }
 #log:hover{
     background-color: white;
@@ -79,22 +73,7 @@
     color: white;
 }
 
-.alt_menu{
-    border:1px solid gray;
-    border-radius: 8px;
-    background-color: rgb(252,252,252);
-    width: 94%;
-    margin-right: auto;
-    margin-left: auto;
-    position: relative;
-    top:20px;
-    height: 65px;
-    display: flex;
-    padding-right: 25px;
-    padding-right: 25px;
-    justify-content: flex-end;
-    align-items: center;
-}
+
 .newcurrent{
     padding-right: 8px;
     padding-left: 8px;
