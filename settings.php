@@ -13,28 +13,17 @@
             
         
         
+        
         }else if($_POST['state'] === 'look'){
-            $ıd = $_POST['ıd'];
+            $table = $_POST['table'];
+            $ıd = $_POST['id'];
             $id = implode(',',$ıd);
             $user = $_COOKIE['email'];
-            $query = $db->query("SELECT * FROM phones");
-            $datas = $query->fetchAll(PDO::FETCH_ASSOC);
-            $veri = array();
-            foreach ($datas as $data) {
-            if($data['id'] == $id){
-                $veri['name'] = $data['name'];
-                $veri['lastname'] = $data['lastname'];
-                $veri['tel'] = $data['tel'];
-                $veri['model'] = $data['model'];
-                $veri['imei'] = $data['imei'];
-                $veri['extraproduct'] = $data['extraproduct'];
-                $veri['reasonsforfailur'] = $data['reasonsforfailur'];
-            }
-
-            }
-
-            $jsonData = json_encode($veri);
-            echo $jsonData;
+            $query = $db->prepare("SELECT * FROM $table where id = ?");
+            $query->execute([$id]);
+            $datas = $query->fetchall(PDO::FETCH_ASSOC);
+            echo json_encode($datas);
+        
         
         
         }else if($_POST['state'] === 'log'){
@@ -63,17 +52,20 @@
             $add->bindparam(9,$user);
             $add->execute();
             echo true;
-        
-        }
-        else if($_POST['state'] === 'delete'){
-            $dizi =  $_POST['formlist'];
-            foreach ($dizi as $id) {
-                $sil = $db->prepare("DELETE FROM phones WHERE id = ?");
-                $sil->bindParam(1, $id);
-                $sil->execute();
+        }else if($_POST['state'] === 'delete'){
+            $dizi = $_POST['formlist'];
+            $table = $_POST['table'];
+            $allowedTables = ['currents', 'phones', 'table3'];
+            if (in_array($table, $allowedTables)) {
+                foreach ($dizi as $id) {
+                    $sil = $db->prepare("DELETE FROM $table WHERE id = ?");
+                    $sil->bindValue(1, $id, PDO::PARAM_INT);
+                    $sil->execute();
+                }
+                echo true;
+            } else {
+                echo "Geçersiz tablo adı.";
             }
-            echo true;
-        
         }else if($_POST['state'] === 'change'){
             $id = implode(",", $_POST['id']);
             $name = $_POST['name'];
@@ -98,6 +90,36 @@
             }else{
                 echo "error";
             }
+        
+        }else if($_POST['state'] === 'logcurrent'){
+            $name = $_POST['name'];
+            $currenttype = $_POST['currenttype'];
+            $taxadministration = $_POST['taxadministration'];
+            $id = $_POST['id'];
+            $email = $_POST['email'];
+            $tel = $_POST['tel'];
+            $fax = $_POST['fax'];
+            $website = $_POST['website'];
+            $country = $_POST['country'];
+            $province = $_POST['province'];
+            $district = $_POST['district'];
+            $neighbourhood = $_POST['neighbourhood'];
+            $street = $_POST['street'];
+            $buildingnumber = $_POST['buildingnumber'];
+            $apartmentnumber = $_POST['apartmentnumber'];
+            $postcode = $_POST['postcode'];
+            $tarih = date("d"); // Gün
+            $ay = date("m"); // Ay
+            $yil = date("Y"); // Yıl
+            $saat = date("H:i"); // Saat, dakika, saniye
+            $date = $tarih."/".$ay."/".$yil." | ".$saat;
+            $sql = "INSERT INTO currents(name,currenttype,taxadministration,identity,email,tel,fax,website,country,province,district,neighbourhood,street,buildingnumber,apartmennumber,postcode,date) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $stmt = $db->prepare($sql);
+            if($stmt->execute([$name,$currenttype,$taxadministration,$id,$email,$tel,$fax,$website,$country,$province,$district,$neighbourhood,$street,$buildingnumber,$apartmentnumber,$postcode,$date])){
+                echo true;
+            }
+            
+            
         }
     }
 ?>

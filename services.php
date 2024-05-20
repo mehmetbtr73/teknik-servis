@@ -13,42 +13,6 @@
     html{
         overflow: hidden;
     }
-    .tittle {
-        margin-top: 15px;
-        margin-bottom: 20px;
-        margin-left: 15px;
-        font-family: "Roboto Slab", serif;
-        font-style: normal;
-        color: rgb(40, 40, 40);
-        font-size: 18px;
-    }
-
-    .doubleinput {
-        width: 100%;
-        height: 60px;
-        padding-right: 10px;
-        padding-left: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .inputbox {
-        width: 100%;
-    }
-
-    .label {
-        font-size: 12px;
-        color: dodgerblue;
-    }
-
-    .input {
-        width: 97%;
-        height: 30px;
-        border: 1px solid gray;
-        border-radius: 5px;
-    }
-
     #reasonsforfailure {
         height: 100px;
         resize: none;
@@ -59,60 +23,13 @@
         top: 40px;
     }
 
-    .addcurrentbox {
-        top: 50px;
-        height: 480px;
-    }
+
 
     .currentboxbuttons {
         top: 425px;
     }
 
-    .source {
-        border: 1px solid rgb(150, 150, 150);
-        border-radius: 8px;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        position: relative;
-        top: 35px;
-        height: 38px;
-    }
 
-    #source {
-        border: none;
-        border-radius: 8px;
-        width: 100%;
-        height: 100%;
-    }
-
-    .table {
-        border-radius: 4px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        position: relative;
-        top: 60px;
-        height: calc(100vh - 170px);
-    }
-
-    table {
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    ::-webkit-scrollbar {
-        width: 10px;  
-        color: red;
-    }
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1; 
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #888; 
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555; 
-    }
     th {
         padding: 7px;
         background-color: rgb(75, 75, 75);
@@ -137,36 +54,7 @@
         padding-right: 15px;
         padding-left: 15px;
     }
-    .alt_menu {
-        height: 50px;
-        justify-content: flex-end;
-    }
 
-    .altmenu_nav {
-        /*        display: flex;*/
-        display: none;
-        margin-left: 20px;
-        justify-content: space-between;
-        align-items: center;
-        width: 150px;
-        height: 100%;
-    }
-
-    .altmenunav_buttons {
-        border: none;
-        color: rgb(61, 191, 85);
-        border-radius: 4px;
-        font-size: 15px;
-        cursor: pointer;
-        height: 27px;
-        padding-right: 10px;
-        padding-left: 10px;
-    }
-
-    .altmenunav_buttons:hover {
-        background-color: rgb(280, 280, 280);
-        border: 1px solid gray;
-    }
 
     .deletebox {
         border: 1px solid rgb(50, 50, 50);
@@ -239,69 +127,32 @@
         top: 0px;
         display: none;
     }
-
-    .alt_menu {
-        border: 1px solid gray;
-        border-radius: 8px;
-        background-color: rgb(252, 252, 252);
-        position: relative;
-        top: 20px;
-        display: flex;
-        padding-right: 25px;
-        padding-right: 25px;
-        align-items: center;
+    .addcurrentcontainer{
+        position: absolute;
+        z-index: 5;
         width: 100%;
-    }
-
-    .source {
-        display: flex;
-        align-items: center;
-    }
-
-    .ara {
         height: 100%;
-        padding-right: 10px;
-        padding-left: 10px;
-        border-top-right-radius: 8px;
-        border-bottom-right-radius: 8px;
-        border: none;
-        letter-spacing: 1px;
-        cursor: pointer;
-        color: rgb(61, 191, 85);
-        font-size: 15px;
-        background-color: white;
-        font-weight: 600;
-        border-left: 1px solid rgb(150, 150, 150);
+        opacity: 1;
     }
-
-    .ara:hover {
-        background-color: rgb(245, 245, 245);
-
+    .addcurrentbox{
+        position: absolute;
+        width: 800px;
+        border:1px solid gray;
+        z-index: 5;
+        border-radius:5px;
+        left:calc(50% - 400px);
+        right:calc(50% - 400px);
+        background-color: rgb(253,253,253);
+        top: 50px;
+        height: 480px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
-    
-    thead{
-        position: sticky;
-        top: 0px;
-    }
-
 </style>
+<script src="app.js"></script>
 <script>
     $(function() {
-        $("#source").mouseenter(function() {
-            $('#source').css({
-                outline: 'none'
-            });
-        });
-        $("#source").focus(function() {
-            $(".source").css({
-                border: '2px solid rgb(40,40,40)'
-            });
-        });
-        $("#source").blur(function() {
-            $(".source").css({
-                border: '1px solid rgb(150,150,150)'
-            });
-        });
         $(".newcurrent").click(function() {
             $(".addcurrentcontainer").css({
                 display: 'block'
@@ -321,14 +172,10 @@
             $("#reasonsforfailure").val("");
         });
         $("#currentboxexit").click(function() {
-            $(".addcurrentcontainer").css({
-                display: 'none'
-            });
+            $(".addcurrentcontainer").css({display: 'none'});
         });
         $("#cancel").click(function() {
-            $(".addcurrentcontainer").css({
-                display: 'none'
-            });
+            $(".addcurrentcontainer").css({display: 'none'});
         });
         $("#log").click(function() {
             var name = $("#name").val();
@@ -395,7 +242,6 @@
         var formList = [];
         $("table tbody").on("click", "tr", function() {
             var ıd = $(this).attr("id");
-            console.log(ıd);
             if (formList.includes(ıd)) {
                 $("#" + ıd).css({
                     backgroundColor: "rgb(250,250,250)"
@@ -453,6 +299,7 @@
         $("#delete_ok").click(function() {
             $.post("settings.php", {
                 state: 'delete',
+                table:'phones',
                 formlist: formList
             }, function(data) {
                 if (data == true) {
@@ -460,13 +307,6 @@
                 }
             });
         });
-        //    var name_old ;
-        //    var lastname_old;
-        //    var tel_old;
-        //    var model_old;
-        //    var imei_old;
-        //    var extraproduct_old;
-        //    var reasonsforfailure_old;
         $("#edit").click(function() {
             $(".addcurrentcontainer").css({
                 display: 'block'
@@ -491,18 +331,19 @@
             });
             $.post('settings.php', {
                 state: 'look',
-                ıd: formList
+                table:'phones',
+                id: formList
             }, function(data) {
-                console.log(data)
                 var response = JSON.parse(data);
                 console.log(response);
-                var name_old = response['name'];
-                var lastname_old = response['lastname'];
-                var tel_old = response['tel'];
-                var model_old = response['model'];
-                var imei_old = response['imei'];
-                var extraproduct_old = response['extraproduct'];
-                var reasonsforfailure_old = response['reasonsforfailur'];
+                var name_old = response[0]['name'];
+                var lastname_old = response[0]['lastname'];
+                var tel_old = response[0]['tel'];
+                var model_old = response[0]['model'];
+                var imei_old = response[0]['imei'];
+                var extraproduct_old = response[0]['extraproduct'];
+                var reasonsforfailure_old = response[0]['reasonsforfailur'];
+                console.log(name_old);
                 $("#name").val(name_old);
                 $("#lastname").val(lastname_old);
                 $("#tel").val(tel_old);
@@ -520,9 +361,7 @@
                     var reasonsforfailur = $("#reasonsforfailure").val();
 
                     if (name != name_old || lastname != lastname_old || tel != tel_old || model != model_old || imei != imei_old || extraproduct != extraproduct_old || reasonsforfailur != reasonsforfailure_old) {
-                        $("#editbutton").css({
-                            backgroundColor: 'cadetblue'
-                        });
+                        $("#editbutton").css({backgroundColor: 'cadetblue',cursor:'pointer'});
                         $("#editbutton").click(function() {
                             $.post('settings.php', {
                                 state: 'change',
@@ -543,7 +382,7 @@
                         });
                     } else {
                         $("#editbutton").css({
-                            backgroundColor: 'gray'
+                            backgroundColor: 'gray',cursor:'default'
                         });
                     }
                 });
@@ -609,47 +448,51 @@
     <div class="container">
         <div class="addcurrentcontainer" style="display:none">
             <div class="addcurrentbox">
-
-                <i class="fa-solid fa-rectangle-xmark" id="currentboxexit"></i>
-                <div class="tittle">YENİ SERVİS FORMU</div>
-                <div class="doubleinput">
-                    <div class="inputbox">
-                        <label for="name" class="label" style='word-spacing:3px;'>İSİM SOYİSİM</label>
-                        <input type="text" class="input" id="name" maxlength="250">
+                <div class="infoboxtop">
+                    <i class="fa-solid fa-rectangle-xmark" id="currentboxexit"></i>
+                    <div class="tittle">YENİ SERVİS FORMU</div>
+                </div>
+                <div class="form">
+                    <div class="maininputbox">
+                        <div class="inputbox">
+                            <label for="name" class="label" style='word-spacing:3px;'>İSİM SOYİSİM</label>
+                            <input type="text" class="input" id="name" maxlength="250">
+                        </div>
+                        <div class="inputbox">
+                            <label for="lastname" class="label" style='word-spacing:3px;'>TESLİM ALAN KİŞİ</label>
+                            <input type="text" class="input" id="lastname" maxlength="250">
+                        </div>
                     </div>
-                    <div class="inputbox">
-                        <label for="lastname" class="label" style='word-spacing:3px;'>TESLİM ALAN KİŞİ</label>
-                        <input type="text" class="input" id="lastname" maxlength="250">
+                    <div class="maininputbox">
+                        <div class="inputbox">
+                            <label for="tel" class="label">NUMARA</label>
+                            <input type="text" class="input" id="tel" maxlength="15">
+                        </div>
+                        <div class="inputbox">
+                            <label for="model" class="label">MARKA/MODEL</label>
+                            <input type="text" class="input" id="model" maxlength="500">
+                        </div>
+                    </div>
+                    <div class="maininputbox">
+                        <div class="inputbox">
+                            <label for="imei" class="label">İMEİ/SERİ NO</label>
+                            <input type="text" class="input" id="imei" maxlength="15">
+                        </div>
+                    </div>
+                    <div class="maininputbox">
+                        <div class="inputbox">
+                            <label for="extraproduct" class="label" style='word-spacing:2px;'>CİHAZ İLE BİRLİKTE ALINAN ÜRÜNLER</label>
+                            <input type="text" class="input" id="extraproduct" maxlength="1200">
+                        </div>
+                    </div>
+                    <div class="maininputbox" id="failurebox">
+                        <div class="inputbox">
+                            <label for="reasonsforfailure" class="label" style='word-spacing:3px;'>ARIZA NEDENLERİ</label>
+                            <textarea rows="4" cols="50" type="text" class="input" id="reasonsforfailure" maxlength="1200"></textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="doubleinput">
-                    <div class="inputbox">
-                        <label for="tel" class="label">NUMARA</label>
-                        <input type="text" class="input" id="tel" maxlength="15">
-                    </div>
-                    <div class="inputbox">
-                        <label for="model" class="label">MARKA/MODEL</label>
-                        <input type="text" class="input" id="model" maxlength="500">
-                    </div>
-                </div>
-                <div class="doubleinput">
-                    <div class="inputbox">
-                        <label for="imei" class="label">İMEİ/SERİ NO</label>
-                        <input type="text" class="input" id="imei" maxlength="15">
-                    </div>
-                </div>
-                <div class="doubleinput">
-                    <div class="inputbox">
-                        <label for="extraproduct" class="label" style='word-spacing:2px;'>CİHAZ İLE BİRLİKTE ALINAN ÜRÜNLER</label>
-                        <input type="text" class="input" id="extraproduct" maxlength="1200">
-                    </div>
-                </div>
-                <div class="doubleinput" id="failurebox">
-                    <div class="inputbox">
-                        <label for="reasonsforfailure" class="label" style='word-spacing:3px;'>ARIZA NEDENLERİ</label>
-                        <textarea rows="4" cols="50" type="text" class="input" id="reasonsforfailure" maxlength="1200"></textarea>
-                    </div>
-                </div>
+                
                 <div class="currentboxbuttons">
                     <button class="currentboxbutton" id="log">KAYDET</button>
                     <button class="currentboxbutton" id="editbutton" style="display:none">DEĞİŞTİR</button>
@@ -661,12 +504,12 @@
         <div class="alt_menu">
             <div class="altmenu_nav">
                 <button class="altmenunav_buttons" id="delete">SİL</button> <button class="altmenunav_buttons" id="edit">DÜZENLE</button>
-
             </div>
             <button class="newcurrent">Servis Formu Oluştur</button>
         </div>
+        
         <div class="source">
-            <input type="text" id="source" placeholder="İsim Giriniz">
+            <input type="text" class="sourceinput" placeholder="İsim Giriniz">
             <button class="ara">ARA</button>
         </div>
         
