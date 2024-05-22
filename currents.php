@@ -133,6 +133,8 @@
 <script src="app.js"></script>
 <script>
 $(function(){
+    var state = false;
+    var tableList = [];
     $("#currentboxexit").click(function() {
         $(".addcurrentcontainer").css({display: 'none'});
     });
@@ -190,7 +192,9 @@ $(function(){
         var website = $("#website").val();
         var countryselect = $("#country").val();
         var provinceselect = $("#provinceselect").val();
+        var province = $("#province").val();
         var districtselect = $("#districtselect").val();
+        var district = $("#district").val();
         var neighbourhood = $("#neighbourhood").val();
         var street = $("#street").val();
         var buildingnumber = $("#buildingnumber").val();
@@ -199,7 +203,9 @@ $(function(){
         
         var countryselectt = $("#country");
         var provinceselectt = $("#provinceselect");
+        var provincee = $("#provincee");
         var districtselectt = $("#districtselect");
+        var districtt = $("#districtt");
         var neighbourhoodd = $("#neighbourhood");
         var streett = $("#street");
         var buildingnumberr = $("#buildingnumber");
@@ -207,11 +213,49 @@ $(function(){
         
         var adressdisplay = $(".formadress").css('display');
         var adressbox = $(".dropdownadressform");
-        
-        if(adressdisplay == 'none'){
-            if(countryselect === "LÜTFEN ÜLKE SEÇİNİZ" || provinceselect == "LÜTFEN ŞEHİR SEÇİNİZ" || districtselect == "LÜTFEN İLÇE SEÇİNİZ" || neighbourhood == "" || street == "" || buildingnumber == ""){
-                adressbox.css({backgroundColor:'rgb(242, 208, 230,0.6)'});
-                adressbox.css({border:'1px solid red'});
+        if(state == true){
+            if(adressdisplay == 'none'){
+                if(countryselect === "LÜTFEN ÜLKE SEÇİNİZ" || provinceselect !== "LÜTFEN ŞEHİR SEÇİNİZ" || districtselect !== "LÜTFEN İLÇE SEÇİNİZ" || neighbourhood == "" || street == "" || buildingnumber == ""){      
+                        adressbox.css({backgroundColor:'rgb(242, 208, 230,0.6)'});
+                        adressbox.css({border:'1px solid red'});
+                        if(countryselect == "LÜTFEN ÜLKE SEÇİNİZ"){
+                            countryselectt.css({border:'1px solid red'});
+                        }else{
+                            countryselectt.css({border:'1px solid gray'});
+                        }
+                        if(provinceselect == "LÜTFEN ŞEHİR SEÇİNİZ"){
+                            provinceselectt.css({border:'1px solid red'});
+                            $("#province").css({border:'1px solid red'});
+                        }else{
+                            provinceselectt.css({border:'1px solid gray'});
+                            $("#province").css({border:'1px solid gray'});
+                        }
+                        if(districtselect == "LÜTFEN İLÇE SEÇİNİZ"){
+                            districtselectt.css({border:'1px solid red'});
+                            $("#district").css({border:'1px solid red'});
+                        }else{
+                            districtselectt.css({border:'1px solid gray'});
+                            $("#district").css({border:'1px solid red'});
+                        }
+                        if(neighbourhood == ""){
+                            neighbourhoodd.css({border:'1px solid red'});
+                        }else{
+                            neighbourhoodd.css({border:'1px solid gray'});
+                        }
+                        if(street == ""){
+                            streett.css({border:'1px solid red'});
+                        }else{
+                            streett.css({border:'1px solid gray'});
+                        }
+                        if(buildingnumber == ""){
+                            buildingnumberr.css({border:'1px solid red'});
+                        }else{
+                            buildingnumberr.css({border:'1px solid gray'});
+                        }
+
+                }  
+            }else{
+
                 if(countryselect == "LÜTFEN ÜLKE SEÇİNİZ"){
                     countryselectt.css({border:'1px solid red'});
                 }else{
@@ -246,45 +290,81 @@ $(function(){
                 }else{
                     buildingnumberr.css({border:'1px solid gray'});
                 }
-            }
-        }else{
-            
-            if(countryselect == "LÜTFEN ÜLKE SEÇİNİZ"){
-                countryselectt.css({border:'1px solid red'});
+
+            }   
+        }else if(state == false){
+            if(adressdisplay == 'none'){
+                if(countryselect === "LÜTFEN ÜLKE SEÇİNİZ" || province !== "" || district !== "" || neighbourhood == "" || street == "" || buildingnumber == ""){      
+                        adressbox.css({backgroundColor:'rgb(242, 208, 230,0.6)'});
+                        adressbox.css({border:'1px solid red'});
+                        if(countryselect == ""){
+                            countryselectt.css({border:'1px solid red'});
+                        }else{
+                            countryselectt.css({border:'1px solid gray'});
+                        }
+                        if(province == ""){
+                            $("#province").css({border:'1px solid red'});
+                        }else{
+                            $("#province").css({border:'1px solid gray'});
+                        }
+                        if(district == ""){
+                            $("#district").css({border:'1px solid red'});
+                        }else{
+                            $("#district").css({border:'1px solid gray'});
+                        }
+                        if(neighbourhood == ""){
+                            neighbourhoodd.css({border:'1px solid red'});
+                        }else{
+                            neighbourhoodd.css({border:'1px solid gray'});
+                        }
+                        if(street == ""){
+                            streett.css({border:'1px solid red'});
+                        }else{
+                            streett.css({border:'1px solid gray'});
+                        }
+                        if(buildingnumber == ""){
+                            buildingnumberr.css({border:'1px solid red'});
+                        }else{
+                            buildingnumberr.css({border:'1px solid gray'});
+                        }
+
+                }  
             }else{
-                countryselectt.css({border:'1px solid gray'});
-            }
-            if(provinceselect == "LÜTFEN ŞEHİR SEÇİNİZ"){
-                provinceselectt.css({border:'1px solid red'});
-                $("#province").css({border:'1px solid red'});
-            }else{
-                provinceselectt.css({border:'1px solid gray'});
-                $("#province").css({border:'1px solid gray'});
-            }
-            if(districtselect == "LÜTFEN İLÇE SEÇİNİZ"){
-                districtselectt.css({border:'1px solid red'});
-                $("#district").css({border:'1px solid red'});
-            }else{
-                districtselectt.css({border:'1px solid gray'});
-                $("#district").css({border:'1px solid red'});
-            }
-            if(neighbourhood == ""){
-                neighbourhoodd.css({border:'1px solid red'});
-            }else{
-                neighbourhoodd.css({border:'1px solid gray'});
-            }
-            if(street == ""){
-                streett.css({border:'1px solid red'});
-            }else{
-                streett.css({border:'1px solid gray'});
-            }
-            if(buildingnumber == ""){
-                buildingnumberr.css({border:'1px solid red'});
-            }else{
-                buildingnumberr.css({border:'1px solid gray'});
-            }
-            
+
+                if(countryselect == "LÜTFEN ÜLKE SEÇİNİZ"){
+                    countryselectt.css({border:'1px solid red'});
+                }else{
+                    countryselectt.css({border:'1px solid gray'});
+                }
+                if(province == ""){
+                    $("#province").css({border:'1px solid red'});
+                }else{
+                      $("#province").css({border:'1px solid gray'});
+                }
+                if(district == ""){
+                    $("#district").css({border:'1px solid red'});
+                }else{
+                    $("#district").css({border:'1px solid gray'});
+                }
+                if(neighbourhood == ""){
+                    neighbourhoodd.css({border:'1px solid red'});
+                }else{
+                    neighbourhoodd.css({border:'1px solid gray'});
+                }
+                if(street == ""){
+                    streett.css({border:'1px solid red'});
+                }else{
+                    streett.css({border:'1px solid gray'});
+                }
+                if(buildingnumber == ""){
+                    buildingnumberr.css({border:'1px solid red'});
+                }else{
+                    buildingnumberr.css({border:'1px solid gray'});
+                }
+
+            }   
         }
+        
         if(name === ""){
             $("#name").css({border:'1px solid red'});
         
@@ -310,34 +390,64 @@ $(function(){
         }else{
             $("#id").css({border:'1px solid gray'});
         }
-        
-        if(name !== "" && currenttype !== "" && taxadministration !== "" && id !== "" && countryselect!=="LÜTFEN ÜLKE SEÇİNİZ" && provinceselect !== "LÜTFEN ŞEHİR SEÇİNİZ" && districtselect !== "LÜTFEN İLÇE SEÇİNİZ" && neighbourhood !== "" && street !== "" && buildingnumber !== ""){
-            $.post('settings.php',{
-                state:'logcurrent',
-                name:name,
-                currenttype:currenttype,
-                taxadministration:taxadministration,
-                id:id,
-                email:email,
-                tel:tel,
-                fax:fax,
-                website:website,
-                country:countryselect,
-                province:provinceselect,
-                district:districtselect,
-                neighbourhood:neighbourhood,
-                street:street,
-                buildingnumber:buildingnumber,
-                apartmentnumber:apartmentnumber,
-                buildingnumber:buildingnumber,
-                postcode:postcode
-                
-            },function(data){
-                if(data == 1){
-                    location.reload();
-                }
-            });
+        if(state === true){
+            console.log(true);
+            if(name !== "" && currenttype !== "" && taxadministration !== "" && id !== "" && countryselect!=="LÜTFEN ÜLKE SEÇİNİZ" && provinceselect !== "LÜTFEN ŞEHİR SEÇİNİZ" && districtselect !== "LÜTFEN İLÇE SEÇİNİZ" && neighbourhood !== "" && street !== "" && buildingnumber !== ""){
+                $.post('settings.php',{
+                    state:'logcurrent',
+                    name:name,
+                    currenttype:currenttype,
+                    taxadministration:taxadministration,
+                    id:id,
+                    email:email,
+                    tel:tel,
+                    fax:fax,
+                    website:website,
+                    country:countryselect,
+                    province:provinceselect,
+                    district:districtselect,
+                    neighbourhood:neighbourhood,
+                    street:street,
+                    buildingnumber:buildingnumber,
+                    apartmentnumber:apartmentnumber,
+                    buildingnumber:buildingnumber,
+                    postcode:postcode
+
+                },function(data){
+                    if(data == 1){
+                        location.reload();
+                    }
+                });
         }
+        }else if(state == false){
+            if(name !== "" && currenttype !== "" && taxadministration !== "" && id !== "" && countryselect!=="LÜTFEN ÜLKE SEÇİNİZ" && province !== "" && district !== "" && neighbourhood !== "" && street !== "" && buildingnumber !== ""){
+                    $.post('settings.php',{
+                        state:'logcurrent',
+                        name:name,
+                        currenttype:currenttype,
+                        taxadministration:taxadministration,
+                        id:id,
+                        email:email,
+                        tel:tel,
+                        fax:fax,
+                        website:website,
+                        country:countryselect,
+                        province:province,
+                        district:district,
+                        neighbourhood:neighbourhood,
+                        street:street,
+                        buildingnumber:buildingnumber,
+                        apartmentnumber:apartmentnumber,
+                        buildingnumber:buildingnumber,
+                        postcode:postcode
+
+                    },function(data){
+                        if(data == 1){
+                            location.reload();
+                        }
+                    });      
+                }
+            }
     });
     $(".dropdownadressform").click(function(){
         $(".formadress").slideToggle(1000); 
@@ -345,8 +455,10 @@ $(function(){
         $(this).css({backgroundColor:'rgb(142, 208, 230,0.2)'});
     });
     $('#country').change(function() {
-        var selectedCountry = $(this).val(); // Seçilen ülke kodunu al
-        if(selectedCountry === "TÜRKİYE"){
+        var selectedCountry = $(this).val(); 
+        if(selectedCountry.toLowerCase() === "türkiye"){
+            state = true;
+            console.log(true);
             $("#province").css({display:'none'});
             var province = $("#provinceselect");
             province.css({display:'block'});
@@ -361,6 +473,8 @@ $(function(){
                 });
             });
         }else{
+            state=false;
+            console.log(false);
             $("#provinceselect").css({display:'none'});
             $("#province").css({display:'block'});
             $("#districtselect").css({display:'none'});
@@ -384,7 +498,6 @@ $(function(){
             });
         });
     });
-    var tableList = [];
     $("table tbody").on('click','tr',function(){
         var value = $(this).attr('id');
         if(tableList.includes(value)){
@@ -427,7 +540,6 @@ $(function(){
                 }
             });
     });
-    
     $("#edit").click(function(){
         $(".addcurrentcontainer").css({display:'flex'});
         $("#log").css({display:'none'});
@@ -511,9 +623,15 @@ $(function(){
                                 }
                                 $("#provinceselect").append(option);
                             });
-                            // İlçeleri yüklemek için sehirler.json dosyasının tam yüklenmesini beklememiz gerekir.
-                            // Bu nedenle, ilçeleri yükleme işlemi burada değil, sehirler.json dosyasının yüklendiği bloğun içinde olmalıdır.
                         });
+                    }else{
+                        $("#provinceselect").css({display: 'none'});
+                        $("#province").css({display: 'block'});
+                        $("#province").val(provinceselect_old);
+                        $("#districtselect").css({display: 'none'});
+                        $("#district").css({display: 'block'});
+                        $("#district").val(districtselect_old);
+                        
                     }
                 });
 
@@ -532,11 +650,6 @@ $(function(){
 
 
 
-
-                
-                
-                
-                
                 $("#district").css({display:'none'});
                 $("#districtselect").css({display:'block'});
                 $("#districtselect").empty();
@@ -560,14 +673,93 @@ $(function(){
                 var website = $("#website").val();
                 var countryselect = $("#country").val();
                 var provinceselect = $("#provinceselect").val();
+                var province = $("#province").val();
                 var districtselect = $("#districtselect").val();
+                var district = $("#district").val();
                 var neighbourhood = $("#neighbourhood").val();
                 var street = $("#street").val();
                 var buildingnumber = $("#buildingnumber").val();
                 var apartmentnumber = $("#apartmentnumber").val();
                 var postcode = $("#postcode").val();
-                console.log(postcode + " //// "+postcode_old);
-                if(name !== name_old || currenttype !== currenttype_old || taxadministration !== taxadministration_old || id != id_old ||email !== email_old || tel != tel_old || fax !== fax_old || website !== website_old || countryselect.toLocaleLowerCase() != countryselect_old || provinceselect !== provinceselect_old || districtselect !== districtselect_old || neighbourhood !== neighbourhood_old || street !== street_old || buildingnumber !== buildingnumber_old || apartmentnumber != apartmentnumber_old ||postcode != postcode_old){
+                if(countryselect_old.toLowerCase() == 'türkiye'){
+                    state = true;
+                    if(state == false){
+                        if(name !== name_old || currenttype !== currenttype_old || taxadministration !== taxadministration_old || id != id_old ||email !== email_old || tel != tel_old || fax !== fax_old || website !== website_old || countryselect.toLocaleLowerCase() != countryselect_old || province !== provinceselect_old || district !== districtselect_old || neighbourhood !== neighbourhood_old || street !== street_old || buildingnumber !== buildingnumber_old || apartmentnumber != apartmentnumber_old ||postcode != postcode_old){
+                            $("#editbutton").css({backgroundColor:'cadetblue',cursor:'pointer'});
+                        }
+                    }
+
+//                    if(name !== name_old || currenttype !== currenttype_old || taxadministration !== taxadministration_old || id != id_old ||email !== email_old || tel != tel_old || fax !== fax_old || website !== website_old || countryselect.toLocaleLowerCase() != countryselect_old || provinceselect !== provinceselect_old || districtselect !== districtselect_old || neighbourhood !== neighbourhood_old || street !== street_old || buildingnumber !== buildingnumber_old || apartmentnumber != apartmentnumber_old ||postcode != postcode_old){
+//                        $("#editbutton").css({backgroundColor:'cadetblue',cursor:'pointer'});
+//                        $("#editbutton").click(function(){
+//                            if(state == false){
+//                                $("#provinceselect").css({display:'none'});
+//                                $("#province").css({display:'block'});
+//                                $("#districtselect").css({display:'block'});
+//                                $("#district").css({display:'none'});
+//                                $.post('settings.php',{
+//                                    state:'change',
+//                                    table:'currents',
+//                                    id:tableList,
+//                                    name:name,
+//                                    currenttype:currenttype,
+//                                    taxadministration:taxadministration,
+//                                    identity:id,
+//                                    email:email,
+//                                    tel:tel,
+//                                    fax:fax,
+//                                    website:website,
+//                                    country:countryselect,
+//                                    province:province,
+//                                    district:district,
+//                                    neighbourhood:neighbourhood,
+//                                    street:street,
+//                                    buildingnumber:buildingnumber,
+//                                    apartmennumber:apartmentnumber,
+//                                    postcode:postcode
+//                                },function(data){
+//                                    if(data == true){
+//                                        location.reload();
+//                                    }
+//                                });
+//                            }else if(state == true){
+//                                    $.post('settings.php',{
+//                                        state:'change',
+//                                        table:'currents',
+//                                        id:tableList,
+//                                        name:name,
+//                                        currenttype:currenttype,
+//                                        taxadministration:taxadministration,
+//                                        identity:id,
+//                                        email:email,
+//                                        tel:tel,
+//                                        fax:fax,
+//                                        website:website,
+//                                        country:countryselect,
+//                                        province:provinceselect,
+//                                        district:districtselect,
+//                                        neighbourhood:neighbourhood,
+//                                        street:street,
+//                                        buildingnumber:buildingnumber,
+//                                        apartmennumber:apartmentnumber,
+//                                        postcode:postcode
+//                                    },function(data){
+//                                        if(data == true){
+//                                            location.reload();
+//                                        }
+//                                    });
+//                            }
+//                        });
+//
+//                    }else{
+//                        $("#editbutton").css({backgroundColor:'gray',cursor:'default'});
+//                    }
+                    
+
+//                });
+                    
+                }else{
+                    if(name !== name_old || currenttype !== currenttype_old || taxadministration !== taxadministration_old || id != id_old ||email !== email_old || tel != tel_old || fax !== fax_old || website !== website_old || countryselect.toLocaleLowerCase() != countryselect_old || province !== provinceselect_old || district !== districtselect_old || neighbourhood !== neighbourhood_old || street !== street_old || buildingnumber !== buildingnumber_old || apartmentnumber != apartmentnumber_old ||postcode != postcode_old){
                     $("#editbutton").css({backgroundColor:'cadetblue',cursor:'pointer'});
                     $("#editbutton").click(function(){
                         $.post('settings.php',{
@@ -583,22 +775,26 @@ $(function(){
                             fax:fax,
                             website:website,
                             country:countryselect,
-                            province:provinceselect,
-                            district:districtselect,
+                            province:province,
+                            district:district,
                             neighbourhood:neighbourhood,
                             street:street,
                             buildingnumber:buildingnumber,
-                            apartmentnumber:apartmentnumber,
+                            apartmennumber:apartmentnumber,
                             postcode:postcode
                         },function(data){
-                            console.log(data);
+                            if(data == true){
+                                location.reload();
+                            }
                         });
                     });
-                }else{
-                    $("#editbutton").css({backgroundColor:'gray',cursor:'default'});
+                    }else{
+                        $("#editbutton").css({backgroundColor:'gray',cursor:'default'});
+                    }
                 }
+
             });
-            });
+        });
             
     });
     

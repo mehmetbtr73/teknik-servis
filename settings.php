@@ -67,29 +67,38 @@
                 echo "Geçersiz tablo adı.";
             }
         }else if($_POST['state'] === 'change'){
-            $id = implode(",", $_POST['id']);
-            $name = $_POST['name'];
-            $lastname = $_POST['lastname'];
-            $tel = $_POST['tel'];
-            $model= $_POST['model'];
-            $imei = $_POST['imei'];
-            $extraproduct = $_POST['extraproduct'];
-            $reasonsforfailur = $_POST['reasonsforfailur'];
+                // POST verilerini al
+                $table = $_POST['table']; // Tablo adı
+                $id = implode(',',$_POST['id']); // Güncellenecek satırın ID'si
 
-            $change = $db->prepare("UPDATE phones SET name=?, lastname=?, tel=?, model=?, imei=?, extraproduct=?, reasonsforfailur=? WHERE id=?");
-            $change->bindParam(1, $name);
-            $change->bindParam(2, $lastname);
-            $change->bindParam(3, $tel);
-            $change->bindParam(4, $model);
-            $change->bindParam(5, $imei);
-            $change->bindParam(6, $extraproduct);
-            $change->bindParam(7, $reasonsforfailur);
-            $change->bindParam(8, $id);
-            if($change->execute()){
-                echo true;
-            }else{
-                echo "error";
-            }
+                // 'table' ve 'id' anahtarlarını POST verilerinden kaldır
+                unset($_POST['table']);
+                unset($_POST['id']);
+                unset($_POST['state']); // 'state' anahtarını da kaldır
+
+                // Güncellenecek sütun ve değerleri al
+                $columns = [];
+                $values = [];
+                foreach ($_POST as $column => $value) {
+                    if (is_array($value)) {
+                        // Diziyi stringe dönüştür
+                        $value = implode(',', $value);
+                    }
+                    $columns[] = "$column = :$column";
+                    $values[":$column"] = $value;
+                }
+
+                // Güncelleme sorgusunu oluştur
+                $sql = "UPDATE $table SET " . implode(", ", $columns) . " WHERE id = :id";
+                $stmt = $db->prepare($sql);
+                $values[":id"] = $id;
+
+                // Sorguyu çalıştır
+                if ($stmt->execute($values)) {
+                    echo true;
+                } else {
+                    echo false;
+                }
         
         }else if($_POST['state'] === 'logcurrent'){
             $name = $_POST['name'];

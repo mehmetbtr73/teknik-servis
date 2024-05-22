@@ -366,6 +366,7 @@
                             $.post('settings.php', {
                                 state: 'change',
                                 id: formList,
+                                table:'phones',
                                 name: name,
                                 lastname: lastname,
                                 tel: tel,
